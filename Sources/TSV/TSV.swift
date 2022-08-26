@@ -6,6 +6,16 @@ public struct TSV {
     /// the headings for the columns
     public var columnHeadings: [String]? = nil
     public var records: Matrix<String>
+    private var contents: [[String:String]] {
+        guard let columnHeadings = columnHeadings else { return [] }
+        
+        return records.grid.map { record in
+            record.enumerated().reduce(into: [:]) { recordDict, pair in
+                let (index, value) = pair
+                recordDict[columnHeadings[index]] = value
+            }
+        }
+    }
 }
 
 extension TSV {
