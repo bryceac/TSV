@@ -84,5 +84,50 @@ final class TSVTests: XCTestCase {
         XCTAssertNoThrow(try TSV(columns: columns, records: records))
     }
     
-    func
+    func testCreatingTSVFailsDueToTooFewHeaders() {
+        let columns = [
+            "Date",
+            "Check No.",
+            "Reconciled",
+            "Caegory",
+            "Vendor",
+            "Memo",
+            "Credit"
+        ]
+        
+        let records = [
+            [
+                "08/25/2022",
+                "1260",
+                "Y",
+                "Opening Balance",
+                "Sam Hill Credit Union",
+                "Open Account",
+                "500"
+            ],
+            [
+                "08/25/2022",
+                "",
+                "N",
+                "Gifts",
+                "Fake Street Electronics",
+                "Head set",
+                "",
+                "200"
+            ],
+            [
+                "08/25/2022",
+                "",
+                "N",
+                "",
+                "Velociraptor Entertainment",
+                "Pay Day",
+                "50000"
+            ]
+        ]
+        
+        XCTAssertThrowsError(try TSV(columns: columns, records: records), "initializer should throw error because columns are not an adequate numner") { error in
+            XCTAssertEqual(error as? TSVError, TSVError.tooFewColumnHeadings)
+        }
+    }
 }
