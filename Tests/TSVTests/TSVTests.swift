@@ -38,7 +38,7 @@ final class TSVTests: XCTestCase {
         }
     }
     
-    func testCreatingTSVWithColumns() {
+    func testCreatingTSV() {
         let columns = [
             "Date",
             "Check No.",
@@ -83,4 +83,6 @@ final class TSVTests: XCTestCase {
         
         XCTAssertNoThrow(try TSV(columns: columns, records: records))
     }
+    
+    func
 }
