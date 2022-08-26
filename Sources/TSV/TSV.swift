@@ -59,7 +59,7 @@ extension TSV {
         
         guard .none ~= columns && records.allSatisfy({ record in
             record.count == longestRow.count
-        }) || columns!.count >= longestRow.count else {
+        }) || !(.none ~= columns) && columns!.count >= longestRow.count else {
             if let _ = columns {
                 throw TSVError.tooFewColumnHeadings
             } else {
