@@ -37,4 +37,50 @@ final class TSVTests: XCTestCase {
             XCTAssertEqual(error as? TSVParseError, TSVParseError.columnsNotEqual(lineNumber: 2))
         }
     }
+    
+    func testCreatingTSV() {
+        let columns = [
+            "Date",
+            "Check No.",
+            "Reconciled",
+            "Caegory",
+            "Vendor",
+            "Memo",
+            "Credit",
+            "Withdrawal"
+        ]
+        
+        let records = [
+            [
+                "08/25/2022",
+                "1260",
+                "Y",
+                "Opening Balance",
+                "Sam Hill Credit Union",
+                "Open Account",
+                "500"
+            ],
+            [
+                "08/25/2022",
+                "",
+                "N",
+                "Gifts",
+                "Fake Street Electronics",
+                "Head set",
+                "",
+                "200"
+            ],
+            [
+                "08/25/2022",
+                "",
+                "N",
+                "",
+                "Velociraptor Entertainment",
+                "Pay Day",
+                "50000"
+            ]
+        ]
+        
+        XCTAssertNoThrow(try TSV(columns: columns, records: records))
+    }
 }
