@@ -1,6 +1,7 @@
-public struct TSV {
-    public private(set) var text = "Hello, World!"
+import Foundation
+import Matrix
 
-    public init() {
-    }
+public struct TSV {
+    public var columns: [String]? = nil
+    public var records: Matrix<String>
 }
