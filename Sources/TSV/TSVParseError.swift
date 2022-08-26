@@ -23,3 +23,13 @@ extension TSVParseError: LocalizedError {
         return error
     }
 }
+
+extension TSVParseError: Equatable {
+    public static func ==(lhs: Self, rhs: Self) -> Bool {
+        switch (lhs, rhs) {
+        case (.tooFewColumnHeadings(let firstLine), .tooFewColumnHeadings(let secondLine)): return firstLine == secondLine
+        case (.columnsNotEqual(let firstLine), .columnsNotEqual(let secondLine)): return firstLine == secondLine
+        default: return false
+        }
+    }
+}
