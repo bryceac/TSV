@@ -38,7 +38,7 @@ final class TSVTests: XCTestCase {
         }
     }
     
-    func testCreatingTSV() {
+    func testCreatingTSVWithColumns() {
         let columns = [
             "Date",
             "Check No.",
