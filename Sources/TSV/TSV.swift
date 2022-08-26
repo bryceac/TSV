@@ -51,4 +51,24 @@ extension TSV {
             self.records = Matrix(withGrid: records)
         }
     }
+    
+    public init(columns: [String]? = nil, records: [[String]]) throws {
+        let longestRow = records.max { firstRow, secondRow in
+            firstRow.count < secondRow.count
+        }!
+        
+        guard .none ~= columns && records.allSatisfy({ record in
+            record.count == longestRow.count
+        }) || columns!.count >= longestRow.count else {
+            if let _ = columns {
+                throw TSVError.tooFewColumnHeadings
+            } else {
+                throw TSVError.columnsNotEqual
+            }
+        }
+        
+        columnHeadings = columns
+        
+        self.records = .none ~= columns ? Matrix(withGrid: records) : Matrix(columns: columns!.count, withGrid: records)
+    }
 }
