@@ -22,7 +22,7 @@ final class TSVTests: XCTestCase {
         """
         
         XCTAssertThrowsError(try TSV(text, withHeaders: true), "initializer should throw error because there are too few headers") { error in
-            XCTAssertEqual(error as? TSVParseError, TSVParseError.tooFewColumnHeadings(lineNumber: 1))
+            XCTAssertEqual(error as? TSVParseError, TSVParseError.tooFewColumnHeadings(lineNumber: 2))
         }
     }
 }
