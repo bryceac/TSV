@@ -34,7 +34,7 @@ final class TSVTests: XCTestCase {
         """
         
         XCTAssertThrowsError(try TSV(text), "initializer should throw error because columns are not equal.") { error in
-            XCTAssertEqual(error as? TSVParseError, TSVParseError.tooFewColumnHeadings(lineNumber: 2))
+            XCTAssertEqual(error as? TSVParseError, TSVParseError.columnsNotEqual(lineNumber: 2))
         }
     }
 }
