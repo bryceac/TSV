@@ -7,6 +7,7 @@
 
 import Foundation
 
+/// A type that represents the errors that can be encountered when try to parse a TSV.
 public enum TSVParseError {
     case tooFewColumnHeadings(lineNumber: Int), columnsNotEqual(lineNumber: Int)
 }

@@ -6,6 +6,8 @@
 //
 
 import Foundation
+
+/// A Type that represents that possible errors that can be encountered when creating a TSV.
 public enum TSVError {
     case tooFewColumnHeadings, columnsNotEqual
 }
