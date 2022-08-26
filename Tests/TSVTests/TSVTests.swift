@@ -130,4 +130,41 @@ final class TSVTests: XCTestCase {
             XCTAssertEqual(error as? TSVError, TSVError.tooFewColumnHeadings)
         }
     }
+    
+    func testCreatingTSVFailsDueToColumnsNotBeingEqual() {
+        let records = [
+            [
+                "08/25/2022",
+                "1260",
+                "Y",
+                "Opening Balance",
+                "Sam Hill Credit Union",
+                "Open Account",
+                "500"
+            ],
+            [
+                "08/25/2022",
+                "",
+                "N",
+                "Gifts",
+                "Fake Street Electronics",
+                "Head set",
+                "",
+                "200"
+            ],
+            [
+                "08/25/2022",
+                "",
+                "N",
+                "",
+                "Velociraptor Entertainment",
+                "Pay Day",
+                "50000"
+            ]
+        ]
+        
+        XCTAssertThrowsError(try TSV(records: records), "initializer should fail because the records do not have an equal number of columns") { error in
+            XCTAssertEqual(error as? TSVError, TSVError.columnsNotEqual)
+        }
+    }
 }
