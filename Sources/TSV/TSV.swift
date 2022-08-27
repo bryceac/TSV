@@ -113,13 +113,13 @@ extension TSV {
         return records[row, column]
     }
     
-    public subscript(column key: String) -> [String] {
+    public subscript(column: String) -> [String] {
         guard !contents.isEmpty else { return [] }
         
         return contents.filter { record in
-            record.keys.contains(key)
+            record.keys.contains(column)
         }.compactMap { record in
-            record[key]
+            record[column]
         }
     }
 }

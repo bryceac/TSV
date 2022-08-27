@@ -231,6 +231,6 @@ final class TSVTests: XCTestCase {
         
         let expectedColumn = [String](repeating: "08/25/2022", count: 3)
         
-        XCTAssertEqual(tsv[column: "Date"], expectedColumn)
+        XCTAssertEqual(tsv["Date"], expectedColumn)
     }
 }
