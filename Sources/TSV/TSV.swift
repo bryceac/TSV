@@ -156,6 +156,22 @@ extension TSV {
             record[column]
         }
     }
+    
+    // MARK: Type Methods
+    static func load(from path: URL, withHeaders: Bool) throws -> TSV {
+        let content = try String(contentsOf: path, encoding: .utf8)
+        
+        return try TSV(content, withHeaders: withHeaders)
+    }
+    
+    // MARK: Functions
+    func save(to path: URL) throws {
+        #if os(iOS)
+        try "\(self)".data(using: .utf8)?.write(to: path, options: [.noFileProtection])
+        #else
+        try "\(self)".data(using: .utf8)?.write(to: path, options: [.atomic])
+        #endif
+    }
 }
 
 extension TSV: CustomStringConvertible {
