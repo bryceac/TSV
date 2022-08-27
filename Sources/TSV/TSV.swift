@@ -109,10 +109,22 @@ extension TSV {
         return records[column: column]
     }
     
+    /**
+     Grab at value at a specified y,x coordinate, excluding the header.
+     - Parameters:
+        - row: A zero-based index specifying the row.
+        - column: A Zero-based index specifying the column.
+     - Returns: A String value at the specified coordinate.
+     */
     public subscript(row: Int, column: Int) -> String {
         return records[row, column]
     }
     
+    /**
+     retrieve a column with a particular name, excluding headers.
+     - parameter column: The name of the column to retrieve.
+     - Returns: A String array of the items in a specified column.
+     */
     public subscript(column: String) -> [String] {
         guard !contents.isEmpty else { return [] }
         
