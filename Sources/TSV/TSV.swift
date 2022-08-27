@@ -54,6 +54,14 @@ extension TSV {
             }
         }
         
+        guard records.allSatisfy({record in
+            record.count == longestRow.count
+        }) else {
+            let index = records.firstIndex(of: longestRow)!
+            
+            throw TSVParseError.columnsNotEqual(lineNumber: index+1)
+        }
+        
         if withHeaders {
             columnHeadings = contents[0]
             self.records = Matrix(columns: contents[0].count, withGrid: records)
@@ -83,6 +91,14 @@ extension TSV {
             } else {
                 throw TSVError.columnsNotEqual
             }
+        }
+        
+        guard records.allSatisfy({record in
+            record.count == longestRow.count
+        }) else {
+            let index = records.firstIndex(of: longestRow)!
+            
+            throw TSVParseError.columnsNotEqual(lineNumber: index+1)
         }
         
         columnHeadings = columns
