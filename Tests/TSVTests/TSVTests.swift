@@ -167,4 +167,42 @@ final class TSVTests: XCTestCase {
             XCTAssertEqual(error as? TSVError, TSVError.columnsNotEqual)
         }
     }
+    
+    func testRetrieveRowByIndex() throws {
+        let text = """
+        Date\tCheck No.\tReconciled\tCategory\tVendor\tMemo\tDeposit\tWithdrawal
+        08/25/2022\t1260\tY\tOpening Balance\tSam Hill Credit Union\tOpen Account\t500
+        08/25/2022\t\tN\tGifts\tFake Street Electronics\tHead set\t\t200
+        08/25/2022\t\tN\t\tVelociraptor Entertainment\tPay Day\t50000
+        """
+        
+        let tsv = try TSV(text)
+        
+        let expectedRow = [
+            "08/25/2022",
+            "1260",
+            "Y",
+            "Opening Balance",
+            "Sam Hill Credit Union",
+            "Open Account",
+            "500"
+        ]
+        
+        XCTAssertEqual(tsv[0], expectedRow)
+    }
+    
+    func testRetrieveColumnByIndex() throws {
+        let text = """
+        Date\tCheck No.\tReconciled\tCategory\tVendor\tMemo\tDeposit\tWithdrawal
+        08/25/2022\t1260\tY\tOpening Balance\tSam Hill Credit Union\tOpen Account\t500
+        08/25/2022\t\tN\tGifts\tFake Street Electronics\tHead set\t\t200
+        08/25/2022\t\tN\t\tVelociraptor Entertainment\tPay Day\t50000
+        """
+        
+        let tsv = try TSV(text)
+        
+        let expectedColumn = [String](repeating: "08/25/2022", count: 3)
+        
+        XCTAssertEqual(tsv[column: 0], expectedColumn)
+    }
 }
