@@ -108,4 +108,18 @@ extension TSV {
     public subscript(column column: Int) -> [String] {
         return records[column: column]
     }
+    
+    public subscript(row: Int, column: Int) -> String {
+        return records[row, column]
+    }
+    
+    public subscript(column key: String) -> [String] {
+        guard !contents.isEmpty else { return [] }
+        
+        return contents.filter { record in
+            record.keys.contains(key)
+        }.compactMap { record in
+            record[key]
+        }
+    }
 }
