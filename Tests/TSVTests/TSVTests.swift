@@ -5,9 +5,9 @@ final class TSVTests: XCTestCase {
     func testTSVParsing() {
         let text = """
         Date\tCheck No.\tReconciled\tCategory\tVendor\tMemo\tDeposit\tWithdrawal
-        08/25/2022\t1260\tY\tOpening Balance\tSam Hill Credit Union\tOpen Account\t500
+        08/25/2022\t1260\tY\tOpening Balance\tSam Hill Credit Union\tOpen Account\t500\t
         08/25/2022\t\tN\tGifts\tFake Street Electronics\tHead set\t\t200
-        08/25/2022\t\tN\t\tVelociraptor Entertainment\tPay Day\t50000
+        08/25/2022\t\tN\t\tVelociraptor Entertainment\tPay Day\t50000\t
         """
         
         XCTAssertNoThrow(try TSV(text, withHeaders: true))
@@ -16,9 +16,9 @@ final class TSVTests: XCTestCase {
     func testTSVPARsingFailsDueToTooFewHeaders() {
         let text = """
         Date\tCheck No.\tReconciled\tCategory\tVendor\tMemo\tDeposit
-        08/25/2022\t1260\tY\tOpening Balance\tSam Hill Credit Union\tOpen Account\t500
+        08/25/2022\t1260\tY\tOpening Balance\tSam Hill Credit Union\tOpen Account\t500\t
         08/25/2022\t\tN\tGifts\tFake Street Electronics\tHead set\t\t200
-        08/25/2022\t\tN\t\tVelociraptor Entertainment\tPay Day\t50000
+        08/25/2022\t\tN\t\tVelociraptor Entertainment\tPay Day\t50000\t
         """
         
         XCTAssertThrowsError(try TSV(text, withHeaders: true), "initializer should throw error because there are too few headers") { error in
@@ -58,7 +58,8 @@ final class TSVTests: XCTestCase {
                 "Opening Balance",
                 "Sam Hill Credit Union",
                 "Open Account",
-                "500"
+                "500",
+                ""
             ],
             [
                 "08/25/2022",
@@ -77,7 +78,8 @@ final class TSVTests: XCTestCase {
                 "",
                 "Velociraptor Entertainment",
                 "Pay Day",
-                "50000"
+                "50000",
+                ""
             ]
         ]
         
@@ -92,7 +94,7 @@ final class TSVTests: XCTestCase {
             "Caegory",
             "Vendor",
             "Memo",
-            "Credit"
+            "Credit",
         ]
         
         let records = [
@@ -103,7 +105,8 @@ final class TSVTests: XCTestCase {
                 "Opening Balance",
                 "Sam Hill Credit Union",
                 "Open Account",
-                "500"
+                "500",
+                ""
             ],
             [
                 "08/25/2022",
@@ -122,7 +125,8 @@ final class TSVTests: XCTestCase {
                 "",
                 "Velociraptor Entertainment",
                 "Pay Day",
-                "50000"
+                "50000",
+                ""
             ]
         ]
         
@@ -140,7 +144,8 @@ final class TSVTests: XCTestCase {
                 "Opening Balance",
                 "Sam Hill Credit Union",
                 "Open Account",
-                "500"
+                "500",
+                ""
             ],
             [
                 "08/25/2022",
@@ -159,7 +164,8 @@ final class TSVTests: XCTestCase {
                 "",
                 "Velociraptor Entertainment",
                 "Pay Day",
-                "50000"
+                "50000",
+                ""
             ]
         ]
         
@@ -171,9 +177,9 @@ final class TSVTests: XCTestCase {
     func testRetrieveRowByIndex() throws {
         let text = """
         Date\tCheck No.\tReconciled\tCategory\tVendor\tMemo\tDeposit\tWithdrawal
-        08/25/2022\t1260\tY\tOpening Balance\tSam Hill Credit Union\tOpen Account\t500
+        08/25/2022\t1260\tY\tOpening Balance\tSam Hill Credit Union\tOpen Account\t500\t
         08/25/2022\t\tN\tGifts\tFake Street Electronics\tHead set\t\t200
-        08/25/2022\t\tN\t\tVelociraptor Entertainment\tPay Day\t50000
+        08/25/2022\t\tN\t\tVelociraptor Entertainment\tPay Day\t50000\t
         """
         
         let tsv = try TSV(text, withHeaders: true)
@@ -194,9 +200,9 @@ final class TSVTests: XCTestCase {
     func testRetrieveColumnByIndex() throws {
         let text = """
         Date\tCheck No.\tReconciled\tCategory\tVendor\tMemo\tDeposit\tWithdrawal
-        08/25/2022\t1260\tY\tOpening Balance\tSam Hill Credit Union\tOpen Account\t500
+        08/25/2022\t1260\tY\tOpening Balance\tSam Hill Credit Union\tOpen Account\t500\t
         08/25/2022\t\tN\tGifts\tFake Street Electronics\tHead set\t\t200
-        08/25/2022\t\tN\t\tVelociraptor Entertainment\tPay Day\t50000
+        08/25/2022\t\tN\t\tVelociraptor Entertainment\tPay Day\t50000\t
         """
         
         let tsv = try TSV(text, withHeaders: true)
@@ -209,9 +215,9 @@ final class TSVTests: XCTestCase {
     func testRetrieveValueByCoordinates() throws {
         let text = """
         Date\tCheck No.\tReconciled\tCategory\tVendor\tMemo\tDeposit\tWithdrawal
-        08/25/2022\t1260\tY\tOpening Balance\tSam Hill Credit Union\tOpen Account\t500
+        08/25/2022\t1260\tY\tOpening Balance\tSam Hill Credit Union\tOpen Account\t500\t
         08/25/2022\t\tN\tGifts\tFake Street Electronics\tHead set\t\t200
-        08/25/2022\t\tN\t\tVelociraptor Entertainment\tPay Day\t50000
+        08/25/2022\t\tN\t\tVelociraptor Entertainment\tPay Day\t50000\t
         """
         
         let tsv = try TSV(text, withHeaders: true)
@@ -222,9 +228,9 @@ final class TSVTests: XCTestCase {
     func testRetrieveColumnByName() throws {
         let text = """
         Date\tCheck No.\tReconciled\tCategory\tVendor\tMemo\tDeposit\tWithdrawal
-        08/25/2022\t1260\tY\tOpening Balance\tSam Hill Credit Union\tOpen Account\t500
+        08/25/2022\t1260\tY\tOpening Balance\tSam Hill Credit Union\tOpen Account\t500\t
         08/25/2022\t\tN\tGifts\tFake Street Electronics\tHead set\t\t200
-        08/25/2022\t\tN\t\tVelociraptor Entertainment\tPay Day\t50000
+        08/25/2022\t\tN\t\tVelociraptor Entertainment\tPay Day\t50000\t
         """
         
         let tsv = try TSV(text, withHeaders: true)
@@ -237,9 +243,9 @@ final class TSVTests: XCTestCase {
     func testWriteValueToRecord() throws {
         let text = """
         Date\tCheck No.\tReconciled\tCategory\tVendor\tMemo\tDeposit\tWithdrawal
-        08/25/2022\t1260\tY\tOpening Balance\tSam Hill Credit Union\tOpen Account\t500
+        08/25/2022\t1260\tY\tOpening Balance\tSam Hill Credit Union\tOpen Account\t500\t
         08/25/2022\t\tN\tGifts\tFake Street Electronics\tHead set\t\t200
-        08/25/2022\t\tN\t\tVelociraptor Entertainment\tPay Day\t50000
+        08/25/2022\t\tN\t\tVelociraptor Entertainment\tPay Day\t50000\t
         """
         
         var tsv = try TSV(text, withHeaders: true)
@@ -254,9 +260,9 @@ final class TSVTests: XCTestCase {
     func testTSVStringEqualsOriginal() throws {
         let text = """
         Date\tCheck No.\tReconciled\tCategory\tVendor\tMemo\tDeposit\tWithdrawal
-        08/25/2022\t1260\tY\tOpening Balance\tSam Hill Credit Union\tOpen Account\t500
+        08/25/2022\t1260\tY\tOpening Balance\tSam Hill Credit Union\tOpen Account\t500\t
         08/25/2022\t\tN\tGifts\tFake Street Electronics\tHead set\t\t200
-        08/25/2022\t\tN\t\tVelociraptor Entertainment\tPay Day\t50000
+        08/25/2022\t\tN\t\tVelociraptor Entertainment\tPay Day\t50000\t
         """
         
         let tsv = try TSV(text, withHeaders: true)
