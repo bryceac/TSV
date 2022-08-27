@@ -117,7 +117,13 @@ extension TSV {
      - Returns: A String value at the specified coordinate.
      */
     public subscript(row: Int, column: Int) -> String {
-        return records[row, column]
+        get {
+            return records[row, column]
+        }
+        
+        set {
+            records[row, column] = newValue
+        }
     }
     
     /**
