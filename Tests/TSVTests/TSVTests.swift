@@ -22,7 +22,7 @@ final class TSVTests: XCTestCase {
         """
         
         XCTAssertThrowsError(try TSV(text, withHeaders: true), "initializer should throw error because there are too few headers") { error in
-            XCTAssertEqual(error as? TSVParseError, TSVParseError.tooFewColumnHeadings(lineNumber: 2))
+            XCTAssertEqual(error as? TSVParseError, TSVParseError.tooFewColumnHeadings(lineNumber: 1))
         }
     }
     
@@ -144,8 +144,7 @@ final class TSVTests: XCTestCase {
                 "Opening Balance",
                 "Sam Hill Credit Union",
                 "Open Account",
-                "500",
-                ""
+                "500"
             ],
             [
                 "08/25/2022",
@@ -164,8 +163,7 @@ final class TSVTests: XCTestCase {
                 "",
                 "Velociraptor Entertainment",
                 "Pay Day",
-                "50000",
-                ""
+                "50000"
             ]
         ]
         
@@ -191,7 +189,8 @@ final class TSVTests: XCTestCase {
             "Opening Balance",
             "Sam Hill Credit Union",
             "Open Account",
-            "500"
+            "500",
+            ""
         ]
         
         XCTAssertEqual(tsv[0], expectedRow)
