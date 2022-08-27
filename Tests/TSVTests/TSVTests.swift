@@ -268,4 +268,18 @@ final class TSVTests: XCTestCase {
         
         XCTAssertEqual("\(tsv)", text)
     }
+    
+    func testSavingTSVToFile() throws {
+        let text = """
+        Date\tCheck No.\tReconciled\tCategory\tVendor\tMemo\tDeposit\tWithdrawal
+        08/25/2022\t1260\tY\tOpening Balance\tSam Hill Credit Union\tOpen Account\t500\t
+        08/25/2022\t\tN\tGifts\tFake Street Electronics\tHead set\t\t200
+        08/25/2022\t\tN\t\tVelociraptor Entertainment\tPay Day\t50000\t
+        """
+        
+        let tsv = try TSV(text, withHeaders: true)
+        let desktopDirectory = FileManager.default.urls(for: .desktopDirectory, in: .userDomainMask).first!
+        
+        XCTAssertNoThrow(try tsv.save(to: desktopDirectory.appendingPathComponent("transactions").appendingPathExtension("tsv")))
+    }
 }
