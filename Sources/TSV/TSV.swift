@@ -68,7 +68,7 @@ extension TSV {
         
         if withHeaders {
             columnHeadings = contents[0]
-            self.records = Matrix(columns: contents[0].count, withGrid: records)
+            self.records = Matrix(withGrid: records)
         } else {
             self.records = Matrix(withGrid: records)
         }
@@ -107,7 +107,7 @@ extension TSV {
         
         columnHeadings = columns
         
-        self.records = .none ~= columns ? Matrix(withGrid: records) : Matrix(columns: columns!.count, withGrid: records)
+        self.records = Matrix(withGrid: records)
     }
     
     // MARK: Subscripts
