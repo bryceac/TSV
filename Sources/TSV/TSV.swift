@@ -90,4 +90,9 @@ extension TSV {
         
         self.records = .none ~= columns ? Matrix(withGrid: records) : Matrix(columns: columns!.count, withGrid: records)
     }
+    
+    // MARK: Subscripts
+    public subscript(row: Int) -> [String] {
+        return records[row]
+    }
 }
