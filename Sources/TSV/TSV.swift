@@ -95,5 +95,7 @@ extension TSV {
         return records[row]
     }
     
-    public subscript(
+    public subscript(column column: Int) -> [String] {
+        return records[column: column]
+    }
 }
