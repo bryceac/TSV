@@ -91,10 +91,20 @@ extension TSV {
     }
     
     // MARK: Subscripts
+    /**
+     grab a row, not including header row, at a particular index.
+     - parameter row: A zero-based index specifying a particular row.
+     - Returns: A String array with the contents of the desired row.
+     */
     public subscript(row: Int) -> [String] {
         return records[row]
     }
     
+    /**
+     grab a column, not including header row, at a particular index.
+     - parameter column: A zero-based index specifying a particular column.
+     - Returns: A String array with the contents of the desired column.
+     */
     public subscript(column column: Int) -> [String] {
         return records[column: column]
     }
