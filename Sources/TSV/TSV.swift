@@ -162,14 +162,22 @@ extension TSV {
     }
     
     // MARK: Type Methods
-    static func load(from path: URL, withHeaders: Bool) throws -> TSV {
+    /**
+     load TSV data from specified file.
+     - Parameters:
+        - path: The URL for the resource.
+        - withHeaders: specifies whether TSV has headers or not.
+     - Returns: TSV object with file data.
+     */
+    public static func load(from path: URL, withHeaders: Bool) throws -> TSV {
         let content = try String(contentsOf: path, encoding: .utf8)
         
         return try TSV(content, withHeaders: withHeaders)
     }
     
     // MARK: Functions
-    func save(to path: URL) throws {
+    /// save TSV to specified location.
+    public func save(to path: URL) throws {
         #if os(iOS)
         try data?.write(to: path, options: [.noFileProtection])
         #else
