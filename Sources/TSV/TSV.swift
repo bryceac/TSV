@@ -3,6 +3,8 @@ import Matrix
 
 /// A representation of a TSV object
 public struct TSV {
+    
+    // MARK: Properties
     /// the headings for the columns
     public var columnHeadings: [String]? = nil
     
@@ -21,6 +23,15 @@ public struct TSV {
 }
 
 extension TSV {
+    // MARK: Initializers
+    /**
+     create an instance of a TSV from a string.
+     - Parameters:
+        - text: The text to parse
+        - withHeaders: denotes whether columns have headings or not. Default is false.
+     - Returns: TSV object
+     - Throws: `TSVParseError.tooFewColumnHeadings` if the number of headings is insufficent or `TSVParseError.columnsNotEqual` if the number of columns are not equal and **withHeader** is false.
+     */
     public init(_ text: String, withHeaders: Bool = false) throws {
         let contents = text.components(separatedBy: .newlines).map { line in
             line.components(separatedBy: "\t")
@@ -52,6 +63,14 @@ extension TSV {
         }
     }
     
+    /**
+     create TSV object using arrays.
+     - Parameters:
+        - columns: The column headings. Defaults to nil
+        - records: The records in to be found in the TSV.
+     - Returns: TSV object
+     - Throws: `TSVError.tooFewColumnHeadings` if **columns** is not nil and does not have a sufficent number of headings or `TSVError.columnsNotEqual` if **columns** is nil and the records vary in the number of fields contained.
+     */
     public init(columns: [String]? = nil, records: [[String]]) throws {
         let longestRow = records.max { firstRow, secondRow in
             firstRow.count < secondRow.count
