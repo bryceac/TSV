@@ -19,6 +19,10 @@ public struct TSV {
             }
         }
     }
+    
+    private var data: Data? {
+        return "\(self)".data(using: .utf8)
+    }
 }
 
 extension TSV {
@@ -167,9 +171,9 @@ extension TSV {
     // MARK: Functions
     func save(to path: URL) throws {
         #if os(iOS)
-        try "\(self)".data(using: .utf8)?.write(to: path, options: [.noFileProtection])
+        try data?.write(to: path, options: [.noFileProtection])
         #else
-        try "\(self)".data(using: .utf8)?.write(to: path, options: [.atomic])
+        try data?.write(to: path, options: [.atomic])
         #endif
     }
 }
