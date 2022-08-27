@@ -176,7 +176,7 @@ final class TSVTests: XCTestCase {
         08/25/2022\t\tN\t\tVelociraptor Entertainment\tPay Day\t50000
         """
         
-        let tsv = try TSV(text)
+        let tsv = try TSV(text, withHeaders: true)
         
         let expectedRow = [
             "08/25/2022",
@@ -199,7 +199,7 @@ final class TSVTests: XCTestCase {
         08/25/2022\t\tN\t\tVelociraptor Entertainment\tPay Day\t50000
         """
         
-        let tsv = try TSV(text)
+        let tsv = try TSV(text, withHeaders: true)
         
         let expectedColumn = [String](repeating: "08/25/2022", count: 3)
         
