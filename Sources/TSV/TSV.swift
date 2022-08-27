@@ -29,7 +29,7 @@ extension TSV {
         - text: The text to parse
         - withHeaders: denotes whether columns have headings or not. Default is false.
      - Returns: TSV object
-     - Throws: `TSVParseError.tooFewColumnHeadings` if the number of headings is insufficent or `TSVParseError.columnsNotEqual` if the number of columns are not equal and **withHeader** is false.
+     - Throws: `TSVParseError.tooFewColumnHeadings` if the number of headings is insufficent or `TSVParseError.columnsNotEqual` if the number of columns are not equal.
      */
     public init(_ text: String, withHeaders: Bool = false) throws {
         let contents = text.components(separatedBy: .newlines).map { line in
@@ -76,7 +76,7 @@ extension TSV {
         - columns: The column headings. Defaults to nil
         - records: The records in to be found in the TSV.
      - Returns: TSV object
-     - Throws: `TSVError.tooFewColumnHeadings` if **columns** is not nil and does not have a sufficent number of headings or `TSVError.columnsNotEqual` if **columns** is nil and the records vary in the number of fields contained.
+     - Throws: `TSVError.tooFewColumnHeadings` if **columns** is not nil and does not have a sufficent number of headings or `TSVError.columnsNotEqual` if the records vary in the number of fields contained.
      */
     public init(columns: [String]? = nil, records: [[String]]) throws {
         let longestRow = records.max { firstRow, secondRow in
