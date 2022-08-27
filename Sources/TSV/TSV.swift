@@ -8,8 +8,7 @@ public struct TSV {
     /// the headings for the columns
     public var columnHeadings: [String]? = nil
     
-    /// the records in the TSV
-    public var records: Matrix<String>
+    private var records: Matrix<String>
     private var contents: [[String:String]] {
         guard let columnHeadings = columnHeadings else { return [] }
         
@@ -95,4 +94,6 @@ extension TSV {
     public subscript(row: Int) -> [String] {
         return records[row]
     }
+    
+    public subscript(
 }
