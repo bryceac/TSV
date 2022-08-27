@@ -141,3 +141,23 @@ extension TSV {
         }
     }
 }
+
+extension TSV: CustomStringConvertible {
+    public var description: String {
+        var content = ""
+        
+        if let columnHeadings = columnHeadings {
+            content += "\(columnHeadings.joined(separator: "\t"))\n"
+        }
+        
+        for record in records.grid {
+            if records.grid.last != record {
+                content += "\(record.joined(separator: "\t"))\n"
+            } else {
+                content += "\(record.joined(separator: "\t"))"
+            }
+        }
+        
+        return content
+    }
+}
