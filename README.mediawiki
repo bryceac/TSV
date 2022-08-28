@@ -1,0 +1,81 @@
+=TSV=
+
+'''Version:''' 0.1
+
+'''Author:''' Bryce Campbell
+
+'''Copyright:''' 2022
+
+'''Description:''' A Library that can read and write <abbr title="tab separated value">TSV</abbr> files.
+
+==Notes==
+
+This library has been tested on macOS 12 with Swift 5.6, 
+but <strong>should</strong> work on other platforms.
+
+===Version History===
+
+<dl>
+<dt style="font-weight:bold">0.1</dt>
+<dd>
+<p>Initial release.</p>
+</dd>
+</dl>
+
+===Limits===
+
+At this time, this library can only be used to parse or create TSV files. 
+It cannot and was never intended to be used to actually edit data in a TSV, 
+such as add rows or columns.
+
+However, values in each field can be adjusted.
+
+===Usage===
+
+To make use of this library, 
+add the package to your repository via Swift Package Manager like this:
+
+<pre>
+dependencies: [
+    // Dependencies declare other packages that this package depends on.
+    // .package(url: /* package url */, from: "1.0.0"),
+    .package(url: "https://github.com/bryceac/TSV", branch: "main")
+]
+</pre>
+
+This adds the current state of the library to your project, 
+though it is best to use a tagged version.
+
+Make sure it is included as a dependency in your main target.
+
+After that, you just need to do something like this to read a TSV file:
+
+<pre>
+import Foundation
+import TSV
+
+let DOCUMENTS_DIRECTORY = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+let TEST_FILE = DOCUMENTS_DIRECTORY.appendingPathComponent("table").appendingPathExtension("tsv")
+
+if let tsv = try? TSV.load(from: TEST_FILE, withHeaders: true) {
+    print(tsv.columnHeadings)
+    for row in tsv.sheet {
+        print(row)
+    }
+}
+</pre>
+
+This will print out the column headers and the rows within.
+
+Thanks to an underlying library, 
+you can also investigate columns individually by either specifying a column index like this:
+
+<pre>
+print(tsv[column: 0]
+</pre>
+
+or, if you declared headers were present, like in the example above:
+
+<pre>
+print(tsv[column: "Date"]
+</pre>
