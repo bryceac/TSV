@@ -13,6 +13,11 @@
 This library has been tested on macOS 12 with Swift 5.6, 
 but <strong>should</strong> work on other platforms.
 
+This library was made because I was contemplating 
+adding another supported format to an app I made, 
+and would help in the event that I want to make 
+other apps that support TSV.
+
 ===Version History===
 
 <dl>
@@ -79,3 +84,71 @@ or, if you declared headers were present, like in the example above:
 <pre>
 print(tsv[column: "Date"]
 </pre>
+
+You can also grab rows, excluding the column headers, by doing this:
+
+<pre>
+tsv[0]
+</pre>
+
+However, the TSV object is not iterable, so if you want to iterate over all 
+the rows, it is best to do want you saw in the initial example, as the 
+<strong>sheet</strong> property exposes the underlying 2D array.
+
+Values can also be grabbed individually from the TSV like this:
+
+<pre>
+tsv[0,0]
+</pre>
+
+Thanks to the library used in this library, 
+this index does the same thing as if you did the following:
+
+<pre>
+sheet[0][0]
+</pre>
+
+====Saving Data====
+
+Unlike reading a TSV, where you have to deckare if a TSV has headers, 
+saving a TSV is as simple as this:
+
+<pre>
+let DOCUMENTS_DIRECTORY = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+let TEST_FILE = DOCUMENTS_DIRECTORY.appendingPathComponent("table").appendingPathExtension("tsv")
+
+try? tsv.save(to: TEST_FILE)
+</pre>
+
+This will save the file in the Documents directory.
+
+===Contributing===
+
+If you would like to help make this project even better, feel free 
+to create a fork and issue a pull request.
+
+All code will be licensed under the same license as this project.
+
+===Support===
+
+If you have any problems, I will try my best to help you. 
+
+Send an email to the following address to ask for help:
+
+tonyhawk2100@gmail.com
+
+===Project Used===
+
+This library makes use of the following project:
+
+<dl>
+<dt style="font-weight:bold"><a href="https://github.com/bryceac/Matrix">Matrix</a></dt>
+<dd>
+<p>A custom library I made when I 
+wanted to make my own Sudoku puzzle generator.</p>
+<p>This library is used to house TSV data 
+and simplify the work 
+that would have been 
+required to allow column and value retrieval.</p>
+</dd>
+</dl>
