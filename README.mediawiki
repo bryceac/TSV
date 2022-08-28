@@ -8,6 +8,8 @@
 
 '''Description:''' A Library that can read and write <abbr title="tab separated value">TSV</abbr> files.
 
+'''License:''' See LICENSE
+
 ==Notes==
 
 This library has been tested on macOS 12 with Swift 5.6, 
