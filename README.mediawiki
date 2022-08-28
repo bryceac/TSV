@@ -139,7 +139,7 @@ Send an email to the following address to ask for help:
 
 tonyhawk2100@gmail.com
 
-===Project Used===
+===Projects Used===
 
 This library makes use of the following project:
 
