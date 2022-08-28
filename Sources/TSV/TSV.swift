@@ -9,6 +9,12 @@ public struct TSV {
     public var columnHeadings: [String]? = nil
     
     private var records: Matrix<String>
+    
+    /// records contained in TSV, not counting column heading.
+    public var sheet: [[String]] {
+        records.grid
+    }
+    
     private var contents: [[String:String]] {
         guard let columnHeadings = columnHeadings else { return [] }
         
